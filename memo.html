@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mémo GIT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        code {
+            display: block;
+            background: #eee;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>Mémo GIT</h1>
+<h2>La quête de la vérité</h2>
+<p><strong>Résultat de la quête:</strong> «On n’apprend bien qu’à force de se tromper».</p>
+
+<h2>Detached head</h2>
+<p>Branche manquante entre HEAD et le commit. Dans ce cas HEAD renseigne alors non plus une référence de branche mais directement un commit, d’où le message d’erreur. On travaille sur le commit et non sur la branche.</p>
+<p>Si on ne corrige pas le problème, nous ne pourrons pas conserver les modifications.</p>
+<p>Pour résoudre le problème il faudra depuis le commit en question créer une branche temporaire, puis ensuite la fusionner avec la bonne.</p>
+<p>Avec les commandes :</p>
+<code>
+    $ git checkout -b temp<br>
+    $ git checkout master<br>
+    $ git merge temp
+</code>
+
+<h2>Glossaire Git</h2>
+<ul>
+    <li><strong>Dépôt :</strong> (repository ou remote) c’est le lieu où sont stockés tous les fichiers sources de ton projet. Le dépôt peut être un répertoire local sur ta machine ou un répertoire distant sur un serveur git. Le dépôt distant peut être accessible en https ou en ssh. Utilise plutôt une connexion ssh (avec clé SSH personnelle) qui est plus sécurisée et cela t’évite aussi de créer un fichier avec tes informations d’authentifications.</li>
+    <li><strong>Zone de transit :</strong> (staging area ou Index) cette zone mémoire contient les fichiers que tu mets de côté pour préparer le commit. On dit que les fichiers sont indexés.</li>
+    <li><strong>Commit :</strong> c’est une enveloppe qui contient une petite portion de codes modifiés d’un ou plusieurs fichiers. Fais des commits les plus petits possible. Tu peux comparer les commits entre eux et voir les évolutions du code de ton projet. On utilise le verbe commiter.</li>
+    <li><strong>Tag :</strong> c’est un pointeur vers un commit particulier. On s’en sert pour faire des releases.</li>
+    <li><strong>Branches :</strong> (branch) une branche c’est une version du dépôt où tu peux travailler sur une fonctionnalité particulière sans impacter le code courant. Il y a toujours une branche par défaut, c’est souvent main (anciennement master), et tu peux avoir autant de branches en cours que tu veux.</li>
+    <li><strong>HEAD :</strong> c’est un pointeur vers le dernier commit de la branche en cours. Permet de nous repérer dans notre historique ; définir l’endroit depuis lequel nous produisons un commit.</li>
+    <li><strong>Pousser :</strong> (push) cette action partage les commits du dépôt local avec le dépôt distant associé au projet en cours.</li>
+    <li><strong>Rapporter :</strong> (fetch) cette action récupère les commits du dépôt distant en local sans les appliquer.</li>
+    <li><strong>Tirer :</strong> (pull) cette action télécharge les commits manquants du dépôt distant sur notre dépôt local et les applique.</li>
+    <li><strong>Fusion :</strong> (merge) cette action applique les changements d’une branche sur une autre. Sur un serveur git, tu peux faire une demande de fusion qui peut être revue par tes collègues avant la fusion réelle. Sur Github, c’est une Pull Request (PR) et sur GitLab une Merge Request (MR).</li>
+</ul>
+
+<h2>Les commandes Git</h2>
+<p><code>$ git [command] -h</code> ou <code>$ git command -help</code> : aide</p>
+<h3>Initialisation du repository</h3>
+<ul>
+    <li><code>$ git init</code> : transforme le répertoire courant en nouveau dépôt local.</li>
+    <li><code>$ git init [projet]</code> crée un nouveau dépôt local dans le sous-répertoire projet.</li>
+    <li><code>$ git clone [url]</code> : fait une copie locale d’un projet depuis un dépôt distant.</li>
+</ul>
+<h3>Process de sauvegarde des versions</h3>
+<ul>
+    <li><code>$ git status</code> : affiche tous les fichiers qui peuvent être commités (ajoutés, supprimés, renommés, modifiés).</li>
+    <li><code>$ git diff</code> : affiche les différences entre les fichiers indexés et les fichiers dans le dépôt.</li>
+    <li><code>$ git commit -m "[description]"</code> : crée un commit avec le message fourni.</li>
+    <li><code>$ git tag [mon-tag] &lt;[commit]&gt;</code> : étiquette le commit, ou par défaut le dernier commit, avec le tag.</li>
+</ul>
+<h3>Les branches</h3>
+<ul>
+    <li><code>$ git branch</code> : affiche toutes les branches du dépôt local.</li>
+    <li><code>$ git branch [nom-de-branche]</code> : crée une nouvelle branche.</li>
+    <li><code>$ git branch -m [nom-de-branche] [nouveau-nom]</code> : change le nom de la branche.</li>
+    <li><code>$ git checkout [nom-de-branche]</code> : bascule sur la branche demandée.</li>
+    <li><code>$ git merge [nom-de-branche]</code> : fusionne les commits de la branche spécifiée dans la branche courante.</li>
+    <li><code>$ git rebase [nom-de-branche]</code> : change le commit de base de la branche courante.</li>
+    <li><code>$ git branch -d [nom-de-branche]</code> : supprime la branche.</li>
+</ul>
+<h3>Partage</h3>
+<ul>
+    <li><code>$ git fetch [depot]</code> : récupère tout l’historique du dépôt, sans modifier votre branche locale.</li>
+    <li><code>$ git merge [depot]/[branche]</code> : fusionne la branche du dépôt dans la branche locale.</li>
+    <li><code>$ git pull</code> : récupère tout l’historique du dépôt et incorpore les modifications en local.</li>
+    <li><code>$ git push [alias] [branche]</code> : envoie tous les commits de la branche locale vers le serveur git.</li>
+    <li><code>$ git push --tag</code> : envoie tous les tags locaux vers le serveur git distant.</li>
+    <li><code>$ git push [alias] [mon-tag]</code> : envoie le tag spécifié vers le serveur git.</li>
+</ul>
+
+<h2>Gérer les conflits</h2>
+<p>Un conflit Git se produit lorsque deux modifications concurrentes sont apportées au même fichier, mais ces modifications sont incompatibles entre elles. Git ne peut pas résoudre automatiquement ces conflits car il ne peut pas déterminer quelle version du fichier est correcte.</p>
+<h3>Les conflits</h3>
+<p>Lors d’une fusion de branches ou d’un pull depuis un dépôt distant, Git vous informera des conflits s'il en détecte.</p>
+<ul>
+    <li>Ouvrir les fichiers en conflit dans l’IDE. À l'intérieur, des sections marquées avec les modifications provenant de différentes sources.</li>
+    <li>Résoudre le conflit et supprimer les marqueurs de conflits.</li>
+    <li>Une fois que tous les conflits sont résolus, ajouter les fichiers modifiés avec <code>$ git add </code>.</li>
+    <li>Valider les modifications avec <code>$ git commit -m 'message'</code>.</li>
+    <li>Reprendre la procédure de fusion ou de pull si nécessaire.</li>
+    <li>Pousser ou fusionner les modifications résolues.</li>
+</ul>
+</body>
+</html>

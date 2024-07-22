@@ -31,4 +31,8 @@ Le mémo est organisé en plusieurs sections, chacune couvrant un aspect spécif
 *   **Gérer les conflits**
     - Comment gérer et résoudre les conflits dans Git.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+## Copyright
+
+© 2024 Hélène Finot. All rights reserved.
